@@ -17,7 +17,7 @@ set(CMAKE_C_STANDARD 11)
 #Uncomment for software floating point
 add_compile_options(-mfloat-abi=soft)
 
-add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+add_compile_options(-mcpu=cortex-m3 -mthumb -mthumb-interwork)
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
 
 # uncomment to mitigate c++17 absolute addresses warnings
@@ -42,24 +42,37 @@ add_link_options(-T ${LINKER_SCRIPT})
 # 源文件
 set(SOURCES "")
 
-# 头文件设置
+# 头文件路径
 set(INCLUDE "")
 
+add_subdirectory(base/stcubx)
 include_directories(
     ${INCLUDE}
-    base/stcubx/Core/Inc
+)
+# Lib
+add_subdirectory(vendor)
+get_target_property(VENDOR_INCLUDE_DIRS vendor::stmF1 INCLUDE_DIRECTORIES)
+include_directories(
+    ${VENDOR_INCLUDE_DIRS}
 )
 
-add_subdirectory(vendor)
-add_subdirectory(base/stcubx)
+add_subdirectory(drivers)
+get_target_property(DRIVERS_INCLUDE_DIRS drivers::V1 INCLUDE_DIRECTORIES)
+include_directories(
+    ${DRIVERS_INCLUDE_DIRS}
+)
+
+add_subdirectory(applications)
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 
 target_link_libraries(${PROJECT_NAME}.elf
     vendor::stmF1
+    applications::app1
+    drivers::V1
 )
 
-
+# 获取当前目录路径
 get_property(include_dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 foreach(dir ${include_dirs})
   message("Include Directory: ${dir}")

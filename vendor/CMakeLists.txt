@@ -15,8 +15,3 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC ${BASE_PATH}/STM32F1xx_HAL_Driver/Inc
     PUBLIC ${BASE_PATH}/STM32F1xx_HAL_Driver/Inc/Legacy
     )
-
-get_property(include_dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-foreach(dir ${include_dirs})
-  message("Include Directory1: ${dir}")
-endforeach()
