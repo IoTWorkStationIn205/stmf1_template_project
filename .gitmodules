@@ -1,3 +1,6 @@
 [submodule "vendor/STM32CubeF1"]
 	path = vendor/STM32CubeF1
 	url = https://gitee.com/paopaozhi/STM32CubeF1.git
+[submodule "kernel/rtthread-nano"]
+	path = kernel/rtthread-nano
+	url = https://github.com/IoTWorkStationIn205/rtthread-nano.git
