@@ -8,7 +8,8 @@
 
 ## 依赖
 
-+ RT-Thread API
+~~RT-Thread API~~
++ 暂无特殊依赖
 
 ## 使用方法
 
