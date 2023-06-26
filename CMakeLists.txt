@@ -62,6 +62,17 @@ include_directories(
     ${DRIVERS_INCLUDE_DIRS}
 )
 
+add_subdirectory(base)
+include_directories(
+    ${INCLUDE}
+)
+
+add_subdirectory(kernel)
+get_target_property(DRIVERS_INCLUDE_DIRS kernel INCLUDE_DIRECTORIES)
+include_directories(
+    ${DRIVERS_INCLUDE_DIRS}
+)
+
 add_subdirectory(applications)
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
@@ -70,6 +81,7 @@ target_link_libraries(${PROJECT_NAME}.elf
     vendor::stmF1
     applications::app1
     drivers::V1
+    kernel
 )
 
 # 获取当前目录路径

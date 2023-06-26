@@ -1,0 +1,11 @@
+# 传递源文件  TODO: 1. 修改需要编译的源代码
+file(GLOB_RECURSE SOURCES_CORE "board/*.*")
+
+set(SOURCES ${SOURCES};${SOURCES_CORE})
+set(SOURCES "${SOURCES}" PARENT_SCOPE)
+
+# 头文件  TODO: 2. 修改需要暴露的头文件目录
+set(INCLUDE_CORE "${CMAKE_SOURCE_DIR}/base/board")
+
+set(INCLUDE ${INCLUDE};${INCLUDE_CORE})
+set(INCLUDE "${INCLUDE}" PARENT_SCOPE)
